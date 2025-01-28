@@ -16,7 +16,7 @@ This software helps Non-mathematical background people to apply perturbation the
 
 - **Inputs**: The input would be a non-dimensional equation with an option whether the equation is linear or non linear. Later they also have to input the value of the perturbed parameter e and the time range or number of steps. 
 
--**Outputs**: The output of the system would be a graph for typical parameter and saves a file with numerical solution of the equation for the number of steps given.
+- **Outputs**: The output of the system would be a graph for typical parameter and saves a file with numerical solution of the equation for the number of steps given.
 
 ---
 
