@@ -22,4 +22,4 @@ This software helps Non-mathematical background people to apply perturbation the
 
 ### Useful Libraries
 
-This software will use libraries like odeint and rk4_solver for solving equations. ODEint is a package that helps solve differential equations numerically. It used RK4 method to solve the equations. Documentation for the same can be found here: https://headmyshoulder.github.io/odeint-v2/examples.html.  Another way of solving this is using rk4() library. Documentation for it can be found here: https://people.math.sc.edu/Burkardt/cpp_src/rk4/rk4.html. 
+This software will use libraries like odeint and rk4_solver for solving equations. ODEint is a package that helps solve differential equations numerically. It used RK4 method to solve the equations. Documentation for the same can be found here: https://headmyshoulder.github.io/odeint-v2/examples.html.  Another way of solving this is using rk4() library. Documentation for it can be found here: https://people.math.sc.edu/Burkardt/cpp_src/rk4/rk4.html. Sundials is also a good option to solve the ODE's numerically. 
