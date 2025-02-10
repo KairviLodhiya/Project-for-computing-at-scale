@@ -2,21 +2,28 @@
 
 --- 
 
-## Visualizing an Ordinary Differential Equation with perturbed term
+## Solving a system of stiff, coupled, non-linear equations using IVP solver for coupled oscillators.  
 
 ---
 
-*This software aims to simplify the task of solving ODE's with the help of Perturbation Theory. It also helps visualizing the effect of the perturbed term in an equation.*
+*This code aims to simplify the task of solving ODE's numerically and understand the system of equations better. It also helps visualizing the effects of each term in a system of equations.*
 
-### The need for this Software
+### The need for this code
 
-This software helps Non-mathematical background people to apply perturbation theory on Linear and Non linear ODEs to understand the effects of different terms in a system. 
+This code is used in solving system of equation for a non-linear electro-mechanical coupled oscillator. This oscillator mimics a part of an low powered sensor. This sensor is understood to improve the energy transfer from electrical part to the mechanical part of the system. The system of equations are as follows:
+                                                    my" + ky - 1/2 q^2/eA = kg
+                                                    Lq" + q/C0 + qy/eA = 0
+The Non-dimensional version of this is:
+                                                    y" + y + 1/4 C1q^2 = 1/2
+                                                    q" + C2q + 2C3qy = 0
+Here C1, C2 and C3 are constant parameters which define the system's internal relations. The goal is the toggle these parameters and the boundary conditions [y0 ,q0 ,y0',q0'] to see the nature of the system. These parameters have internal relation - C2+C3 = 1 to equate natural frequencies of both the oscillators. 
 
 ### Inputs and Outputs of the software
 
-- **Inputs**: The input would be a non-dimensional equation with an option whether the equation is linear or non linear. Later they also have to input the value of the perturbed parameter e and the time range or number of steps. The equation would be in the form of ax''+ bx'+ ec = 0. The user has to put in values for a,b and c initially followed by e and number of time steps, tfinal. 
+- **Inputs**: The input would be two non-dimensional parameters [C1, C2] and boundary conditions. It would also ask for number of time steps that this system needs to be running.
+  The format of input should be <C1> <C2> <time_steps> <[y0 ,q0 ,y0',q0']>
 
-- **Outputs**: The output of the system would be a graph for typical parameter and saves a file with numerical solution of the equation for the number of steps given.
+- **Outputs**: The output of the system would be a graphs for x(t), q(t), x'(t) and q'(t) and saves a file with numerical solution of the equation for the number of steps given.
 
 ---
 
