@@ -11,12 +11,18 @@
 ### The need for this code
 
 This code is used in solving system of equation for a non-linear electro-mechanical coupled oscillator. This oscillator mimics a part of an low powered sensor. This sensor is understood to improve the energy transfer from electrical part to the mechanical part of the system. The system of equations are as follows:
+---
                                                     my" + ky - 1/2 q^2/eA = kg
                                                     Lq" + q/C0 + qy/eA = 0
+---
 The Non-dimensional version of this is:
+---
                                                     y" + y + 1/4 C1q^2 = 1/2
                                                     q" + C2q + 2C3qy = 0
+---                                                    
 Here C1, C2 and C3 are constant parameters which define the system's internal relations. The goal is the toggle these parameters and the boundary conditions [y0 ,q0 ,y0',q0'] to see the nature of the system. These parameters have internal relation - C2+C3 = 1 to equate natural frequencies of both the oscillators. 
+
+---
 
 ### Inputs and Outputs of the software
 
