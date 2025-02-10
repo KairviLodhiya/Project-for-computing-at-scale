@@ -21,7 +21,8 @@ Here C1, C2 and C3 are constant parameters which define the system's internal re
 ### Inputs and Outputs of the software
 
 - **Inputs**: The input would be two non-dimensional parameters [C1, C2] and boundary conditions. It would also ask for number of time steps that this system needs to be running.
-  The format of input should be <C1> <C2> <time_steps> <[y0 ,q0 ,y0',q0']>
+  The format of input should be
+  < C1 > < C2 > <time_steps> <[y0 ,q0 ,y0',q0']>
 
 - **Outputs**: The output of the system would be a graphs for x(t), q(t), x'(t) and q'(t) and saves a file with numerical solution of the equation for the number of steps given.
 
