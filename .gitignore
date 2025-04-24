@@ -1,11 +1,12 @@
 /build
 /HighFive
 input.cpp
+.gitmodules
 /.vscode
 /myenv
 Electromechanical_system_kokkos.cpp
-.gitmodules
-/externals/Catch2
-
+externals/Catch2
+externals/Catch2/.vs/
+externals/ 
 
 
