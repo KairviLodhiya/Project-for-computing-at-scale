@@ -3,7 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <adios2.h>
-#include "SolverLibrary.hpp"
+#include "Solvers/SolverLibrary.hpp"
 
 // Struct that defines the ODE system
 typedef double real;

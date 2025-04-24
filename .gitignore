@@ -4,3 +4,8 @@ input.cpp
 /.vscode
 /myenv
 Electromechanical_system_kokkos.cpp
+.gitmodules
+/externals/Catch2
+
+
+
