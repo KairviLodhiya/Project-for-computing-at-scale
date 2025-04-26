@@ -43,6 +43,16 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y libsundials-dev
 
+    - name: Install Kokkos
+      run: |
+        git clone https://github.com/kokkos/kokkos.git
+        cd kokkos
+        mkdir build
+        cd build
+        cmake .. \-DCMAKE_CXX_COMPILER=g++ \ -DKokkos_ENABLE_OPENMP=ON \ -DKokkos_ENABLE_SERIAL=ON \ -DCMAKE_INSTALL_PREFIX=~/kokkos-install
+        make -j$(nproc)
+        make install
+
     - name: Build and Install ADIOS2
       run: |
         git clone https://github.com/ornladios/ADIOS2.git
