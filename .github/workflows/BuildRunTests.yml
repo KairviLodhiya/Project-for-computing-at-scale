@@ -1,0 +1,68 @@
+name: Full Research Project CI
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+  pull_request:
+    branches:
+      - main
+      - master
+      - develop
+
+jobs:
+  build-test-run:
+    runs-on: ubuntu-latest
+
+    env:
+      CMAKE_BUILD_TYPE: Release
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Install System Packages
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cmake g++ git wget libhdf5-dev libopenmpi-dev openmpi-bin python3 python3-pip python3-dev
+
+    - name: Install Python packages
+      run: |
+        pip3 install matplotlib numpy
+
+    - name: Build and Install ADIOS2
+      run: |
+        git clone https://github.com/ornladios/ADIOS2.git
+        cd ADIOS2
+        git checkout v2.10.1   # or a version you want
+        mkdir build
+        cd build
+        cmake .. -DADIOS2_BUILD_BINDINGS=ON -DADIOS2_USE_Python=ON -DCMAKE_INSTALL_PREFIX=$HOME/adios2-install
+        make -j$(nproc)
+        make install
+      # We will set paths to use installed ADIOS2 below.
+
+    - name: Configure CMake project
+      run: |
+        mkdir -p build
+        cd build
+        cmake .. \
+          -DADIOS2_DIR=$HOME/adios2-install/cmake/adios2 \
+          -DCMAKE_PREFIX_PATH="$HOME/adios2-install"
+
+    - name: Build project
+      run: |
+        cd build
+        make -j$(nproc)
+
+    - name: Run Catch2 C++ tests
+      run: |
+        cd build
+        ctest --output-on-failure
+
+    - name: Run Python script for post-processing
+      run: |
+        export PYTHONPATH=$HOME/adios2-install/lib/python3.10/site-packages:$PYTHONPATH
+        python3 your_python_script.py
