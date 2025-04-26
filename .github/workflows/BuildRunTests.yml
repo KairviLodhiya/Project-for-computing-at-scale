@@ -31,6 +31,7 @@ jobs:
     - name: Install Python packages
       run: |
         pip3 install matplotlib numpy
+        pip3 install matplotlib mpi4py
 
     - name: Build and Install ADIOS2
       run: |
