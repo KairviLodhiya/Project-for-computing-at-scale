@@ -26,12 +26,22 @@ jobs:
     - name: Install System Packages
       run: |
         sudo apt-get update
-        sudo apt-get install -y cmake g++ git wget libhdf5-dev libopenmpi-dev openmpi-bin python3 python3-pip python3-dev
+        sudo apt-get install -y libopenmpi-dev libhdf5-dev libboost-all-dev libsundials-dev cmake g++ python3-dev
 
     - name: Install Python packages
       run: |
         pip3 install matplotlib numpy
         pip3 install matplotlib mpi4py
+
+    - name: Install Boost
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libboost-all-dev
+
+    - name: Install Sundials
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libsundials-dev
 
     - name: Build and Install ADIOS2
       run: |
