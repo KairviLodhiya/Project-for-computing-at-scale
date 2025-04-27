@@ -65,6 +65,11 @@ jobs:
         make install
       # We will set paths to use installed ADIOS2 below.
 
+    - name: Install MPI (C and C++)
+      run: |
+        sudo apt update
+        sudo apt install -y libopenmpi-dev openmpi-bin
+
     - name: Clone Catch2
       run: |
         mkdir -p externals
