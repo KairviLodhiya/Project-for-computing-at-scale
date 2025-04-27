@@ -49,7 +49,7 @@ jobs:
         cd kokkos
         mkdir build
         cd build
-        cmake .. \-DCMAKE_CXX_COMPILER=g++ \ -DKokkos_ENABLE_OPENMP=ON \ -DKokkos_ENABLE_SERIAL=ON \ -DCMAKE_INSTALL_PREFIX=~/kokkos-install
+        cmake .. \-DCMAKE_CXX_COMPILER=g++ \ -DKokkos_ENABLE_OPENMP=ON \ -DKokkos_ENABLE_SERIAL=ON \ -DCMAKE_INSTALL_PREFIX=$HOME/kokkos-install
         make -j$(nproc)
         make install
 
