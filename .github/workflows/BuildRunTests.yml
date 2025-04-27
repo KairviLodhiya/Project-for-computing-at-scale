@@ -65,6 +65,12 @@ jobs:
         make install
       # We will set paths to use installed ADIOS2 below.
 
+    - name: Clone Catch2
+      run: |
+        mkdir -p externals
+        cd externals
+        git clone https://github.com/catchorg/Catch2.git
+
     - name: Configure CMake project
       run: |
         mkdir -p build
