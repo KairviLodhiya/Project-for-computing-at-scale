@@ -23,78 +23,80 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
 
-    - name: Install System Packages
+    - name: Install System Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libopenmpi-dev libhdf5-dev libboost-all-dev libsundials-dev cmake g++ python3-dev
+        sudo apt-get install -y \
+          build-essential \
+          cmake \
+          git \
+          g++ \
+          libopenmpi-dev \
+          openmpi-bin \
+          libhdf5-dev \
+          libboost-all-dev \
+          libsundials-dev \
+          python3-dev \
+          python3-pip
 
-    - name: Install Python packages
+    - name: Install Python Packages
       run: |
-        pip3 install matplotlib numpy
-        pip3 install matplotlib mpi4py
+        pip3 install numpy matplotlib mpi4py
 
-    - name: Install Boost
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libboost-all-dev
-
-    - name: Install Sundials
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y libsundials-dev
-
-    - name: Install Kokkos
+    - name: Build and Install Kokkos
       run: |
         git clone https://github.com/kokkos/kokkos.git
-        cd kokkos
-        mkdir build
-        cd build
-        cmake .. \-DCMAKE_CXX_COMPILER=g++ \ -DKokkos_ENABLE_OPENMP=ON \ -DKokkos_ENABLE_SERIAL=ON \ -DCMAKE_INSTALL_PREFIX=$HOME/kokkos-install
+        mkdir -p kokkos/build
+        cd kokkos/build
+        cmake .. \
+          -DCMAKE_CXX_COMPILER=g++ \
+          -DKokkos_ENABLE_OPENMP=ON \
+          -DKokkos_ENABLE_SERIAL=ON \
+          -DCMAKE_INSTALL_PREFIX=$HOME/kokkos-install
         make -j$(nproc)
-        sudo make install
+        make install
 
     - name: Build and Install ADIOS2
       run: |
         git clone https://github.com/ornladios/ADIOS2.git
         cd ADIOS2
-        git checkout v2.10.1   # or a version you want
-        mkdir build
+        git checkout v2.10.1
+        mkdir -p build
         cd build
-        cmake .. -DADIOS2_BUILD_BINDINGS=ON -DADIOS2_USE_Python=ON -DADIOS2_USE_MPI=ON -DCMAKE_INSTALL_PREFIX=$HOME/adios2-install
+        cmake .. \
+          -DADIOS2_BUILD_BINDINGS=ON \
+          -DADIOS2_USE_Python=ON \
+          -DADIOS2_USE_MPI=ON \
+          -DCMAKE_INSTALL_PREFIX=$HOME/adios2-install
         make -j$(nproc)
         make install
-      # We will set paths to use installed ADIOS2 below.
 
-    - name: Install MPI (C and C++)
-      run: |
-        sudo apt update
-        sudo apt install -y libopenmpi-dev openmpi-bin
-
-    - name: Clone Catch2
+    - name: Clone Catch2 for Testing
       run: |
         mkdir -p externals
         cd externals
         git clone https://github.com/catchorg/Catch2.git
 
-    - name: Configure CMake project
+    - name: Configure CMake Project
       run: |
         mkdir -p build
         cd build
         cmake .. \
-          -DADIOS2_DIR=$HOME/adios2-install/cmake/adios2 \
-          -DCMAKE_PREFIX_PATH="$HOME/adios2-install"
+          -DADIOS2_DIR=$HOME/adios2-install/lib/cmake/adios2 \
+          -DCMAKE_PREFIX_PATH="$HOME/adios2-install;$HOME/kokkos-install" \
+          -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE
 
-    - name: Build project
+    - name: Build Project
       run: |
         cd build
         make -j$(nproc)
 
-    - name: Run Catch2 C++ tests
+    - name: Run Catch2 C++ Tests
       run: |
         cd build
         ctest --output-on-failure
 
-    - name: Run Python script for post-processing
+    - name: Run Python Script for Post-processing
       run: |
         export PYTHONPATH=$HOME/adios2-install/lib/python3.10/site-packages:$PYTHONPATH
         python3 your_python_script.py
