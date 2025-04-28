@@ -34,6 +34,19 @@ jobs:
       run: |
         pip3 install numpy matplotlib mpi4py
 
+    - name: Build and Install Sundials
+      run: |
+        git clone https://github.com/LLNL/sundials.git
+        cd sundials
+        mkdir build
+        cd build
+        cmake .. \
+          -DCMAKE_INSTALL_PREFIX=$HOME/sundials-install \
+          -DSUNDIALS_EXAMPLES_ENABLE=OFF \
+          -DSUNDIALS_TESTS_ENABLE=OFF
+        make -j$(nproc)
+        make install
+
     - name: Build OpenMPI from Source
       run: |
         sudo apt-get purge -y libopenmpi-dev openmpi-bin || true
