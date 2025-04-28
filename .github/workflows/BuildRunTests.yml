@@ -86,7 +86,7 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake .. 
+        cmake ..  / -DADIOS2_DIR=$HOME/adios2-install/lib/cmake/adios2 
         
     - name: Build Project
       run: |
