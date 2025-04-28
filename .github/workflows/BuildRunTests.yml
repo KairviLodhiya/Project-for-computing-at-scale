@@ -86,12 +86,8 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake .. \
-          -DCMAKE_C_COMPILER=$HOME/openmpi/bin/mpicc \
-          -DADIOS2_DIR=$HOME/adios2-install/lib/cmake/adios2 \
-          -DCMAKE_PREFIX_PATH="$HOME/adios2-install;$HOME/kokkos-install" \
-          -DCMAKE_BUILD_TYPE=$CMAKE_BUILD_TYPE
-
+        cmake .. 
+        
     - name: Build Project
       run: |
         cd build
