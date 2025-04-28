@@ -3,8 +3,8 @@
 #define SOLVERLIBRARY_HPP
 
 #include <vector>
-#include <cvode/cvode.h>                 // for CVode, N_Vector
-#include <nvector/nvector_serial.h>      // for N_VSerial types
+#include <sundials/include/cvode/cvode.h>                 // for CVode, N_Vector
+#include <sundials/include/nvector/nvector_serial.h>      // for N_VSerial types
 #include <sundials/sundials_config.h>
 
 class SolverLibrary {
