@@ -1,8 +1,8 @@
 #include "SolverLibrary.hpp"
 #include <iostream>
 
-#include <cvode/cvode.h>
-#include <cvode/cvode_ls.h>
+#include <include/cvode/cvode.h>
+#include <include/cvode/cvode_ls.h>
 #include <nvector/nvector_serial.h>
 #include <sunmatrix/sunmatrix_dense.h>
 #include <sunlinsol/sunlinsol_dense.h>
