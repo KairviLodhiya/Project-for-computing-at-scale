@@ -36,16 +36,25 @@ jobs:
 
     - name: Build and Install Sundials
       run: |
+        sudo apt-get update
+        sudo apt-get install -y gfortran  # Needed for Sundials build sometimes
         git clone https://github.com/LLNL/sundials.git
         cd sundials
+        git checkout v6.6.0   # <-- Use a stable version tag
         mkdir build
         cd build
         cmake .. \
           -DCMAKE_INSTALL_PREFIX=$HOME/sundials-install \
+          -DBUILD_SHARED_LIBS=ON \
+          -DSUNDIALS_BUILD_STATIC_LIBS=OFF \
+          -DSUNDIALS_BUILD_SHARED_LIBS=ON \
+          -DSUNDIALS_ENABLE_CXX=ON \
+          -DSUNDIALS_ENABLE_C=ON \
           -DSUNDIALS_EXAMPLES_ENABLE=OFF \
           -DSUNDIALS_TESTS_ENABLE=OFF
         make -j$(nproc)
         make install
+
 
     - name: Build OpenMPI from Source
       run: |
