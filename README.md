@@ -26,14 +26,13 @@ Here C1, C2 and C3 are constant parameters which define the system's internal re
 
 ### Inputs and Outputs of the software
 
-- **Inputs**: The input would be two non-dimensional parameters [C1, C2] and boundary conditions. It would also ask for number of time steps that this system needs to be running.
-  The format of input should be
-  < C1 > < C2 > <time_steps> <[y0 ,q0 ,y0',q0']>
+- **Inputs**: The input would be two equations and boundary conditions. It would also ask for number of time steps that this system needs to be running.
+  This can be done by updating the equations and passing the initial conditions in the function called cv_derivatives() 
 
-- **Outputs**: The output of the system would be a graphs for x(t), q(t), x'(t) and q'(t) and saves a file with numerical solution of the equation for the number of steps given.
+- **Outputs**: The output of the system would be a graphs for y(t), q(t), y'(t) and q'(t) and saves a file with numerical solution of the equation for the number of steps given.
 
 ---
 
 ### Useful Libraries
 
-This software will use libraries like odeint and rk4_solver for solving equations. ODEint is a package that helps solve differential equations numerically. It used RK4 method to solve the equations. Documentation for the same can be found here: https://headmyshoulder.github.io/odeint-v2/examples.html.  Another way of solving this is using rk4() library. Documentation for it can be found here: https://people.math.sc.edu/Burkardt/cpp_src/rk4/rk4.html. Sundials is also a good option to solve the ODE's numerically. 
+This software will use libraries like SolverLibrary for solving equations. SUNDIALS is primarily used to solve the equations.  Another way of solving this is using rk4 method. The data handling is done using ADIOS2 and visualization is done using Python. 
