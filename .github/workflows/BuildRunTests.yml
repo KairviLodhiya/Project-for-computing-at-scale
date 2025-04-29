@@ -78,7 +78,7 @@ jobs:
 
     - name: Build and Install Sundials (from submodule)
       run: |
-        cd externals/sundials
+        cd sundials
         mkdir -p build
         cd build
         cmake .. \
