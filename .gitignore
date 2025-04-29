@@ -1,9 +1,7 @@
 /build
 /HighFive
-input.cpp
-.gitmodules
 /.vscode
 /myenv
-Electromechanical_system_kokkos.cpp
+/.github
 
 

@@ -50,13 +50,13 @@
   - Git with submodule support
 
 #### Steps:
-  1. - **Clone the Repo**
+  1.  **Clone the Repo**
 
     git clone --recurse-submodules https://github.com/KairviLodhiya/Project-for-computing-at-scale.git
     cd Project-for-computing-at-scale
 
 
-  2. - **Build and Install Kokkos**
+  2.  **Build and Install Kokkos**
 
     git clone https://github.com/kokkos/kokkos.git
     mkdir -p kokkos/build
@@ -71,7 +71,7 @@
     cd ../..
 
 
-  3. - **Build and install Sundials from Submodule**
+  3.  **Build and install Sundials from Submodule**
 
     cd sundials
     mkdir build && cd build
@@ -86,7 +86,7 @@
     cd ../../..
 
 
-  4. - **Build and Install ADIOS2**
+  4.  **Build and Install ADIOS2**
 
     cd ADIOS2
     mkdir build && cd build
@@ -99,7 +99,7 @@
     make install
     cd ../../..
 
-  5. - **Build the project**
+  5.  **Build the project**
 
     mkdir build
     cd build
@@ -111,17 +111,18 @@
     make -j$(nproc)
 
   
-  6. - **Run the executable**
+  6.  **Run the executable**
 
     ./Electromechanical_system
 
-  7. - **Run the unit tests**
+  7.  **Run the unit tests**
 
     ctest --output-on-failure
 
 - **Post-Processing** 
 
-    Plot the results from the ADIOS file saved. 
+    *Plot the results from the ADIOS file saved.*
+     
     export PYTHONPATH=$HOME/adios2-install/lib/python3.10/site-packages:$PYTHONPATH
     python3 plot_adios.ipynb
 
