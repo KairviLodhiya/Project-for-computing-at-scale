@@ -122,4 +122,4 @@ jobs:
     - name: Run Python Post-Processing
       run: |
         export PYTHONPATH=$HOME/adios2-install/lib/python3.10/site-packages:$PYTHONPATH
-        python3 your_python_script.py
+        python3 plot_adios.ipynb
