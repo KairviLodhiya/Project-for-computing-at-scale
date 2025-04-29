@@ -17,9 +17,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
-        submodules: recursive
+        submodules: recursive   # <-- THIS IS VERY IMPORTANT
 
-    - name: Checkout submodules
+    - name: Update Git Submodules
       run: |
         git submodule update --init --recursive
 
