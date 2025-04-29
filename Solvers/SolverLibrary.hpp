@@ -2,9 +2,7 @@
 #ifndef SOLVERLIBRARY_HPP
 #define SOLVERLIBRARY_HPP
 
-#include <vector>
-#include <cvode.h>                 // for CVode, N_Vector
-#include <nvector_serial.h>      // for N_VSerial types
+#include <vector>           
 #include <sundials/sundials_config.h>
 
 class SolverLibrary {
