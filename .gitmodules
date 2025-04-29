@@ -4,3 +4,6 @@
 [submodule "sundials"]
 	path = sundials
 	url = https://github.com/LLNL/sundials.git
+[submodule "externals/Catch2"]
+	path = externals/Catch2
+	url = https://github.com/catchorg/Catch2.git

@@ -5,8 +5,5 @@ input.cpp
 /.vscode
 /myenv
 Electromechanical_system_kokkos.cpp
-externals/Catch2
-externals/Catch2/.vs/
-externals/ 
 
 
