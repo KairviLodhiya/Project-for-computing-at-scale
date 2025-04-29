@@ -16,12 +16,7 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
-      with:
-        submodules: recursive
-
-    - name: Update Git Submodules
-      run: |
-        git submodule update --init --recursive
+      
 
     - name: Install System Dependencies
       run: |
