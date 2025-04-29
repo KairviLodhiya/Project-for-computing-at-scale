@@ -17,7 +17,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v4
       with:
-        submodules: recursive   # <-- THIS IS VERY IMPORTANT
+        submodules: recursive
 
     - name: Update Git Submodules
       run: |
@@ -34,33 +34,12 @@ jobs:
           python3-dev \
           python3-pip \
           libhdf5-dev \
-          libboost-all-dev
+          libboost-all-dev \
+          gfortran
 
     - name: Install Python Packages
       run: |
         pip3 install numpy matplotlib mpi4py
-
-    - name: Build and Install Sundials
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y gfortran  # Needed for Sundials build sometimes
-        git clone https://github.com/LLNL/sundials.git
-        cd sundials
-        git checkout v6.6.0   # <-- Use a stable version tag
-        mkdir build
-        cd build
-        cmake .. \
-          -DCMAKE_INSTALL_PREFIX=$HOME/sundials-install \
-          -DBUILD_SHARED_LIBS=ON \
-          -DSUNDIALS_BUILD_STATIC_LIBS=OFF \
-          -DSUNDIALS_BUILD_SHARED_LIBS=ON \
-          -DSUNDIALS_ENABLE_CXX=ON \
-          -DSUNDIALS_ENABLE_C=ON \
-          -DSUNDIALS_EXAMPLES_ENABLE=OFF \
-          -DSUNDIALS_TESTS_ENABLE=OFF
-        make -j$(nproc)
-        make install
-
 
     - name: Build OpenMPI from Source
       run: |
@@ -102,6 +81,21 @@ jobs:
         make -j$(nproc)
         make install
 
+    - name: Build and Install Sundials (from submodule)
+      run: |
+        cd externals/sundials
+        mkdir -p build
+        cd build
+        cmake .. \
+          -DCMAKE_INSTALL_PREFIX=$HOME/sundials-install \
+          -DBUILD_SHARED_LIBS=ON \
+          -DSUNDIALS_ENABLE_CXX=ON \
+          -DSUNDIALS_ENABLE_C=ON \
+          -DSUNDIALS_EXAMPLES_ENABLE=OFF \
+          -DSUNDIALS_TESTS_ENABLE=OFF
+        make -j$(nproc)
+        make install
+
     - name: Clone Catch2
       run: |
         mkdir -p externals
@@ -112,8 +106,12 @@ jobs:
       run: |
         mkdir -p build
         cd build
-        cmake ..  / -DADIOS2_DIR=$HOME/adios2-install/lib/cmake/adios2 
-        
+        cmake .. \
+          -DCMAKE_CXX_COMPILER=$HOME/openmpi/bin/mpic++ \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_PREFIX_PATH="$HOME/kokkos-install;$HOME/adios2-install;$HOME/sundials-install" \
+          -DADIOS2_DIR=$HOME/adios2-install/lib/cmake/adios2
+
     - name: Build Project
       run: |
         cd build
