@@ -76,10 +76,11 @@ jobs:
         make -j$(nproc)
         make install
 
-    - name: Build and Install Sundials (from submodule)
+    - name: Build and Install Sundials 
       run: |
+        git clone https://github.com/LLNL/sundials
         cd sundials
-        mkdir -p build
+                mkdir -p build
         cd build
         cmake .. \
           -DCMAKE_INSTALL_PREFIX=$HOME/sundials-install \
@@ -90,6 +91,7 @@ jobs:
           -DSUNDIALS_TESTS_ENABLE=OFF
         make -j$(nproc)
         make install
+        
 
     - name: Clone Catch2
       run: |
