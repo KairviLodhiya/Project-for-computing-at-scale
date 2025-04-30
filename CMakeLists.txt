@@ -56,6 +56,9 @@ add_executable(Electromechanical_system
 add_executable(Electromechanical_system_rk4
     Electromechanical_system_rk4.cpp
 )
+add_executable(Electromechanical_system_rk4_kokkos
+    Electromechanical_system_rk4_kokkos.cpp
+)
 # Catch2 tests
 add_executable(test_sundials Tests/test_sundial.cpp Solvers/SolverLibrary.hpp)
 add_executable(test_rk4 Tests/test_rk4.cpp Solvers/SolverLibrary.hpp)
@@ -84,6 +87,11 @@ target_link_libraries(Electromechanical_system
      adios2::adios2
 )
 target_link_libraries(Electromechanical_system_rk4
+    SolverLibrary
+    Kokkos::kokkos
+    adios2::adios2
+)
+target_link_libraries(Electromechanical_system_rk4_kokkos
     SolverLibrary
     Kokkos::kokkos
     adios2::adios2
