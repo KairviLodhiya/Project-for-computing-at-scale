@@ -50,8 +50,8 @@ target_link_libraries(SolverLibrary
 )
 
 # Main executable
-add_executable(Electromechanical_system
-    Electromechanical_system.cpp
+add_executable(Electromechanical_system_sundials
+    Electromechanical_system_sundials.cpp
 )
 add_executable(Electromechanical_system_rk4
     Electromechanical_system_rk4.cpp
@@ -81,7 +81,7 @@ target_link_libraries(test_sundials
     sundials_sunmatrixdense
     dl
 )
-target_link_libraries(Electromechanical_system
+target_link_libraries(Electromechanical_system_sundials
      SolverLibrary
      Kokkos::kokkos
      adios2::adios2
