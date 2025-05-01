@@ -3,6 +3,7 @@
 #include <iostream>
 #include <adios2.h>
 #include <vector>
+#include <chrono>
 
 typedef double real;
 constexpr int STATE_SIZE = 5; // time, y, q, dy, dq
@@ -44,6 +45,7 @@ void rk4_step(const ElectromechanicalSystem& sys, real* y, real dt) {
 int main(int argc, char* argv[]) {
   Kokkos::initialize(argc, argv);
   {
+    auto start_time = std::chrono::high_resolution_clock::now();
     const int N = 10;
     const real t_start = 0.0;
     const real t_end = 5000.0;   // for test
@@ -112,7 +114,14 @@ int main(int argc, char* argv[]) {
 
     writer.Close();
     std::cout << "[DONE] All simulations completed and saved." << std::endl;
+
+    auto end_time = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> elapsed = end_time - start_time;
+
+    std::cout << "[DONE] All simulations completed and saved." << std::endl;
+    std::cout << "[TIME] Total execution time: " << elapsed.count() << " seconds" << std::endl;
   }
+  
   Kokkos::finalize();
   return 0;
 }
